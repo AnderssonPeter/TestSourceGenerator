@@ -5,10 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <IncludeBuildOutput>false</IncludeBuildOutput>
-        <IsRoslynComponent>true</IsRoslynComponent>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
-        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     
     <ItemGroup>
@@ -16,13 +13,11 @@
         <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.1.0" PrivateAssets="all" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.1.0" PrivateAssets="all" />
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" PrivateAssets="all" />
-    </ItemGroup>
 
-    <Target Name="_AddAnalyzersToOutput">
-        <ItemGroup>
-            <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).dll" PackagePath="analyzers/dotnet/cs" Pack="true" Visible="false" />
-            <TfmSpecificPackageFile Include="$(OutputPath)\Humanizer.dll" PackagePath="analyzers/dotnet/cs" Pack="true" Visible="false" />
-        </ItemGroup>
-    </Target>
+        <None Include="$(OutputPath)$(AssemblyName).dll" PackagePath="analyzers/dotnet/cs" Pack="true" Visible="false" />
+
+        <!-- Package the Humanizer.Core dependency alongside the generator assembly -->
+        <None Include="$(PkgHumanizer_Core)\lib\netstandard2.0\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
 
 </Project>
