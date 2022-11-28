@@ -17,9 +17,9 @@ public class SourceGenerator : ISourceGenerator
 
         builder.AppendLine(@$"using System;
 namespace {context.Compilation.Assembly.ContainingNamespace?.Name ?? context.Compilation.Assembly.Name};
-class AssemblyInformation {{
-    public string Name = ""{context.Compilation.AssemblyName}"";
-    public string HumanizedName = ""{context.Compilation.AssemblyName.Humanize()}"";
+static class AssemblyInformation {{
+    public static string Name = ""{context.Compilation.AssemblyName}"";
+    public static string HumanizedName = ""{context.Compilation.AssemblyName.Humanize()}"";
 }}
 ");
 
