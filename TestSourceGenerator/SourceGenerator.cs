@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Text;
 using Humanizer;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -23,7 +21,7 @@ static class AssemblyInformation {{
 }}
 ");
 
-        context.AddSource("test", SourceText.From(builder.ToString(), Encoding.UTF8));
+        context.AddSource("AssemblyInformation.cs", SourceText.From(builder.ToString(), Encoding.UTF8));
     }
 
     public void Initialize(GeneratorInitializationContext context)
